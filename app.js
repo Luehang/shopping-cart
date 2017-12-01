@@ -13,7 +13,7 @@ const validator = require('express-validator');
 const MongoStore = require('connect-mongo')(session);
 
 const routes = require('./routes/index');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/User');
 
 require('dotenv').config();
 
