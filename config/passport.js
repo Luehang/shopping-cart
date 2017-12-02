@@ -27,7 +27,7 @@ passport.use('local.signup', new LocalStrategy({
         });
         return done(null, false, req.flash('error', messages));
     }
-    User.findOne({'email': email}, function(err, user) {
+    User.findOne({'email': email.toLowerCase()}, function(err, user) {
         if (err) {
             return done(err);
         }
@@ -35,7 +35,7 @@ passport.use('local.signup', new LocalStrategy({
             return done(null, false, {message: 'Email is already in use.'});
         }
         const newUser = new User();
-        newUser.email = email;
+        newUser.email = email.toLowerCase();;
         newUser.password = newUser.encryptPassword(password);
         newUser.save(function(err, result) {
             if (err) {
@@ -61,7 +61,7 @@ passport.use('local.signin', new LocalStrategy({
         });
         return done(null, false, req.flash('error', messages));
     }
-    User.findOne({'email': email}, function (err, user) {
+    User.findOne({'email': email.toLowerCase()}, function (err, user) {
         if (err) {
             return done(err);
         }
